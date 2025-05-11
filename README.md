@@ -5,3 +5,6 @@ Karena script ini nantinya bertujuan untuk membantu memonitoring req_processing 
 
 ## Informasi
 Script bash ini masih demo dan masih dalam pengembangan. 
+
+### Referensi
+`https://github.com/litespeedtech/litespeed-prometheus-exporter`
