@@ -41,10 +41,6 @@ Karena script ini nantinya bertujuan untuk membantu memonitoring req_processing 
 
 ---
 
-Jika ada VHost dengan `REQ_PROCESSING` > 30, notifikasi Telegram akan dikirim otomatis.
-
----
-
 
 ## 📄 Lisensi
 
