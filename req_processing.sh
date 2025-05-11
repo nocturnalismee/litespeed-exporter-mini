@@ -2,11 +2,14 @@
 #///////////////////////////////////////////////////////////
 # Demo Litespeed Exporter Mini
 # Create & build by Arief (nocturnalismee
-# https://github.com/nocturnalismee/litespeed-exporter-mini/
+# https://github.com/nocturnalismee/simple-monitor-utility
 #///////////////////////////////////////////////////////////
+
+
 
 # Path ke file .rtreport
 REPORT_FILE="/tmp/lshttpd/.rtreport" # Atau path ini dapat diganti dengan /dev/shm/lsws/status/.rtreport karena keduanya dihubungkan dengan symlink ketika saya cek
+
 
 # Cek apakah file .rtreport ada
 if [[ ! -f "$REPORT_FILE" ]]; then
@@ -15,7 +18,7 @@ if [[ ! -f "$REPORT_FILE" ]]; then
 fi
 
 # Custom untuk baca file .rtreport dan cari baris yang mengandung REQ_RATE dengan REQ_PROCESSING
-grep "REQ_RATE" "$REPORT_FILE" | while read -r line; do
+grep "REQ_RATE" "$REPORT_FILE" | tail -n +6 | while read -r line; do
     # Nilai REQ_PROCESSING
     req_processing=$(echo "$line" | awk -F', ' '{print $1}' | awk -F': ' '{print $3}')
     
