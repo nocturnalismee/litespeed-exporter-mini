@@ -14,11 +14,11 @@ Karena script ini nantinya bertujuan untuk membantu memonitoring req_processing 
 
 ---
 
-## 🚀 Cara Penggunaan
+## ⚒️ Cara Penggunaan
 
 1. **Clone repository** ini dan masuk ke direktori `litespeed-exporter`:
    ```bash
-   git clone https://github.com/nocturnalismee/simple-monitor-utility
+   git clone https://github.com/nocturnalismee/litespeed-exporter-mini
    cd litespeed-exporter
    ```
 
@@ -31,14 +31,14 @@ Karena script ini nantinya bertujuan untuk membantu memonitoring req_processing 
 
 3. **Jalankan script:**
    ```bash
-   bash litespeed_exporter.sh
+   ./litespeed_exporter.sh
    ```
 
 4. **(Opsional) Tambahkan ke cronjob** untuk monitoring otomatis setiap 15 menit:
    ```
    */15 * * * * /path/to/litespeed_exporter.sh
    ```
-
+  > Untuk cronjob silahkan disesuaikan dengan kebutuhan dan kemampuan server.
 ---
 
 
