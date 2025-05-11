@@ -1,35 +1,47 @@
 #!/bin/bash
-#///////////////////////////////////////////////////////////
-# Demo Litespeed Exporter Mini
-# Create & build by Arief (nocturnalismee
+# Litespeed Exporter Mini
+# Create & build by Arief (nocturnalismee)
+# (BETA VERSION 0.00)
 # https://github.com/nocturnalismee/simple-monitor-utility
-#///////////////////////////////////////////////////////////
 
+# HOSTNAME SERVER
+HOST=$(hostname)
 
+# Path ke file .rtreport dari Litespeed
+REPORT_FILE="/tmp/lshttpd/.rtreport" # Atau bisa diganti dengan /dev/shm/lsws/status/.rtreport
 
-# Path ke file .rtreport
-REPORT_FILE="/tmp/lshttpd/.rtreport" # Atau path ini dapat diganti dengan /dev/shm/lsws/status/.rtreport karena keduanya dihubungkan dengan symlink ketika saya cek
+# Konfigurasi Telegram
+TELEGRAM_BOT_TOKEN="ISI_TOKEN_BOT_ANDA"
+TELEGRAM_CHAT_ID="ISI_CHAT_ID_ANDA"
 
+# Fungsi untuk mengirim pesan ke Telegram
+send_telegram() {
+    local message="$1"
+    curl -s --max-time 10 -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+        -d chat_id="${TELEGRAM_CHAT_ID}" \
+        -d text="$message" \
+        -d parse_mode="HTML" > /dev/null
+}
 
-# Cek apakah file .rtreport ada
+# Cek apakah file .rtreport tersedia
 if [[ ! -f "$REPORT_FILE" ]]; then
     echo "File .rtreport tidak ditemukan di $REPORT_FILE"
     exit 1
 fi
 
-# Custom untuk baca file .rtreport dan cari baris yang mengandung REQ_RATE dengan REQ_PROCESSING
+# Header output
+printf "%-40s %-20s %-20s %-20s\n" "VHost" "REQ_PROCESSING" "REQ_PER_SEC" "TOT_REQS"
+
+#Custom command line untuk membaca file .rtreport pada baris ke-6
 grep "REQ_RATE" "$REPORT_FILE" | tail -n +6 | while read -r line; do
-    # Nilai REQ_PROCESSING
     req_processing=$(echo "$line" | awk -F', ' '{print $1}' | awk -F': ' '{print $3}')
-    
-    # Custom Cek REQ_PROCESSING lebih dari 30 misalnya
+    # Custom nilai untuk REQ_PROCESSING, misalnya lebih dari 30.
     if (( req_processing > 30 )); then
-        # Ekstrak informasi VHost dan metrik lainnya
         vhost=$(echo "$line" | awk -F'[][]' '{print $2}')
         req_per_sec=$(echo "$line" | awk -F', ' '{print $3}' | awk -F': ' '{print $2}')
         tot_reqs=$(echo "$line" | awk -F', ' '{print $4}' | awk -F': ' '{print $2}')
-        
-        # Menampilkan hasil
-         printf "%-40s %-20s %-20s %-20s\n" "VHost: $vhost" "REQ_PROCESSING: $req_processing" "REQ_PER_SEC: $req_per_sec" "TOT_REQS: $tot_reqs"
+        printf "%-40s %-20s %-20s %-20s\n" "$vhost" "$req_processing" "$req_per_sec" "$tot_reqs"
+        # Kirim notifikasi ke Telegram dengan informasi hostname
+        send_telegram "⚠️ <b>ALERT Litespeed</b>\n<b>Hostname:</b> $HOST\n<b>VHost:</b> $vhost\n<b>REQ_PROCESSING:</b> $req_processing\n<b>REQ_PER_SEC:</b> $req_per_sec\n<b>TOT_REQS:</b> $tot_reqs"
     fi
 done
