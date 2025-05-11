@@ -5,11 +5,8 @@
 # https://github.com/nocturnalismee/litespeed-exporter-mini/
 #///////////////////////////////////////////////////////////
 
-
-
 # Path ke file .rtreport
 REPORT_FILE="/tmp/lshttpd/.rtreport" # Atau path ini dapat diganti dengan /dev/shm/lsws/status/.rtreport karena keduanya dihubungkan dengan symlink ketika saya cek
-
 
 # Cek apakah file .rtreport ada
 if [[ ! -f "$REPORT_FILE" ]]; then
