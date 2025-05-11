@@ -2,7 +2,7 @@
 #///////////////////////////////////////////////////////////
 # Demo Litespeed Exporter Mini
 # Create & build by Arief (nocturnalismee
-# https://github.com/nocturnalismee/simple-monitor-utility
+# https://github.com/nocturnalismee/litespeed-exporter-mini/
 #///////////////////////////////////////////////////////////
 
 
