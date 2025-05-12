@@ -1,8 +1,8 @@
 #!/bin/bash
 # Litespeed Exporter Mini
 # Create & build by Arief (nocturnalismee)
-# (BETA VERSION 0.00)
-# https://github.com/nocturnalismee/simple-monitor-utility
+# (BETA VERSION 0.1)
+# https://github.com/nocturnalismee/litespeed-exporter-mini
 
 # HOSTNAME SERVER
 HOST=$(hostname)
