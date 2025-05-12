@@ -20,12 +20,15 @@ Karena script ini nantinya bertujuan untuk membantu memonitoring req_processing 
    ```bash
    git clone https://github.com/nocturnalismee/litespeed-exporter-mini
    cd litespeed-exporter
+   chmod -x req_processing.sh
    ```
 
 2. **Edit konfigurasi Telegram** di dalam script:
    ```bash
-   TELEGRAM_BOT_TOKEN="ISI_TOKEN_BOT_ANDA"
-   TELEGRAM_CHAT_ID="ISI_CHAT_ID_ANDA"
+   nano req_processing.sh
+   TBT="masukan telegram bot anda disni" # Token Bot Telegram
+   TCID="masukan telegram chat id anda disini" # Chat ID dari Telegram
+   MTID="masukan message thread id anda sini" # message_thread_id dari Telegram
    ```
    > Dapatkan token bot dari [@BotFather](https://t.me/BotFather) dan chat ID dari Telegram Anda.
 
