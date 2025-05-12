@@ -50,6 +50,6 @@ grep "REQ_RATE" "$REPORT_FILE" | tail -n +6 | while read -r line; do
         tot_reqs=$(echo "$line" | awk -F', ' '{print $4}' | awk -F': ' '{print $2}')
         printf "%-40s %-20s %-20s %-20s\n" "$vhost" "$req_processing" "$req_per_sec" "$tot_reqs"
         # Kirim notifikasi ke Telegram
-        send_telegram "$(echo -e "⚠️ <b>ALERT lITESPEED REQUEST</b> ⚠️\n<b>HOSTNAME :</b> $HOST\n<b>VHOST :</b> $vhost\n<b>REQ PROCESSING :</b> $req_processing ❗❗\n<b>REQ/SEC :</b> $req_per_sec\n<b>TOT REQS :</b> $tot_reqs")"
+        send_telegram "$(echo -e "⚠️<b>ALERT LITESPEED REQUEST</b>⚠️\n<b>HOSTNAME :</b> $HOST\n<b>VHOST :</b> $vhost\n<b>REQ PROCESSING :</b> $req_processing ❗❗\n<b>REQ/SEC :</b> $req_per_sec\n<b>TOT REQS :</b> $tot_reqs")"
     fi
 done
