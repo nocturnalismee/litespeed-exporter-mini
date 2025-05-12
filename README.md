@@ -31,7 +31,7 @@ Karena script ini nantinya bertujuan untuk membantu memonitoring req_processing 
 
 3. **Jalankan script:**
    ```bash
-   ./litespeed_exporter.sh
+   ./req_processing.sh
    ```
 
 4. **(Opsional) Tambahkan ke cronjob** untuk monitoring otomatis setiap 15 menit:
