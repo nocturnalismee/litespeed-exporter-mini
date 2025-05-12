@@ -8,9 +8,9 @@
 HOST=$(hostname)
 
 # Token & Chat ID Telegram
-TBT="6764838396:AAFsCGj8iGy1do9GAOxhoPfh4n9_J_sG--Q" # Token Bot Telegram
-TCID="-1002244371996" # Chat ID dari Telegram
-MTID="18250" # message_thread_id dari Telegram
+TBT="" # Token Bot Telegram
+TCID="" # Chat ID dari Telegram
+MTID="" # message_thread_id dari Telegram
 
 # Path ke file .rtreport dari Litespeed
 REPORT_FILE="/tmp/lshttpd/.rtreport" # Atau bisa diganti dengan /dev/shm/lsws/status/.rtreport
