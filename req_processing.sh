@@ -7,15 +7,14 @@
 # HOSTNAME SERVER
 HOST=$(hostname)
 
-# Token & Chat ID Telegram
-TBT="" # Token Bot Telegram
-TCID="" # Chat ID dari Telegram
-MTID="" # message_thread_id dari Telegram
-
 # Path ke file .rtreport dari Litespeed
 REPORT_FILE="/tmp/lshttpd/.rtreport" # Atau bisa diganti dengan /dev/shm/lsws/status/.rtreport
 
 # Fungsi untuk mengirimkan pesan notifikasi ke Telegram
+TBT="MASUKAN TOKEN BOT TELEGRAM" # Token Bot Telegram
+TCID="MASUKAN CHAT ID TELEGRAM" # Chat ID dari Telegram
+MTID="MASUKAN MESSAGE THREAD ID" # message_thread_id dari Telegram
+
 send_telegram() {
     local message="$1"
     if [[ -n "$MTID" ]]; then
@@ -32,25 +31,25 @@ send_telegram() {
     fi
 }
 
-# Cek apakah file .rtreport tersedia
+# Fungsi untuk validasi file .rtreport
 if [[ ! -f "$REPORT_FILE" ]]; then
     echo "File .rtreport tidak ditemukan di $REPORT_FILE"
     exit 1
 fi
 
-# Header output
+# Custom Header output
 printf "%-40s %-20s %-20s %-20s\n" "VHost" "REQ_PROCESSING" "REQ_PER_SEC" "TOT_REQS"
 
 #Custom command line untuk membaca file .rtreport pada baris ke-6
 grep "REQ_RATE" "$REPORT_FILE" | tail -n +6 | while read -r line; do
     req_processing=$(echo "$line" | awk -F', ' '{print $1}' | awk -F': ' '{print $3}')
-    # Custom nilai untuk REQ_PROCESSING, misalnya lebih dari 30.
-    if (( req_processing > 30 )); then
+    # Custom nilai untuk REQ_PROCESSING, misalnya lebih dari 800.
+    if (( req_processing > 800 )); then
         vhost=$(echo "$line" | awk -F'[][]' '{print $2}')
         req_per_sec=$(echo "$line" | awk -F', ' '{print $3}' | awk -F': ' '{print $2}')
         tot_reqs=$(echo "$line" | awk -F', ' '{print $4}' | awk -F': ' '{print $2}')
         printf "%-40s %-20s %-20s %-20s\n" "$vhost" "$req_processing" "$req_per_sec" "$tot_reqs"
-        # Kirim notifikasi ke Telegram dengan informasi hostname server
-        send_telegram "⚠️ <b>ALERT Litespeed</b>\n<b>Hostname:</b> $HOST\n<b>VHost:</b> $vhost\n<b>REQ_PROCESSING:</b> $req_processing\n<b>REQ_PER_SEC:</b> $req_per_sec\n<b>TOT_REQS:</b> $tot_reqs"
+        # Kirim notifikasi ke Telegram
+        send_telegram "$(echo -e "⚠️ <b>ALERT lITESPEED REQUEST</b> ⚠️\n<b>HOSTNAME :</b> $HOST\n<b>VHOST :</b> $vhost\n<b>REQ PROCESSING :</b> $req_processing ❗❗\n<b>REQ/SEC :</b> $req_per_sec\n<b>TOT REQS :</b> $tot_reqs")"
     fi
 done
