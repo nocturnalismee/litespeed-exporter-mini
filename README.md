@@ -9,8 +9,8 @@ Karena script ini nantinya bertujuan untuk membantu memonitoring req_processing 
 
 1. **Script membaca file `.rtreport`** yang dimilik Litespeed (default: `/tmp/lshttpd/.rtreport`) atau (`/dev/shm/lsws/status/.rtreport`).
 2. **Memfilter baris** yang mengandung `REQ_RATE` dan mengambil data mulai baris ke-6.
-3. **Menampilkan data** VHost yang memiliki `REQ_PROCESSING` lebih dari 30 (Bisa disesuikan dengan kebutuhan).
-4. **Mengirim notifikasi Telegram** Jika ada `REQ_PROCESSING` pada vhost domain yang memiliki nilai misalnya 30 request maka akan mengirimkan notifikasi ke telegram.
+3. **Menampilkan data** VHost yang memiliki nilai `REQ_PROCESSING` lebih dari 800 misalnya (Bisa disesuikan dengan kebutuhan).
+4. **Mengirim notifikasi Telegram** Jika ada `REQ_PROCESSING` pada vhost domain yang memiliki nilai misalnya 800 request maka akan mengirimkan notifikasi ke telegram.
 
 ---
 
