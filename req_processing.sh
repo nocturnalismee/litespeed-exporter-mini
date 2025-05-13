@@ -10,6 +10,9 @@ HOST=$(hostname)
 # Path ke file .rtreport dari Litespeed
 REPORT_FILE="/tmp/lshttpd/.rtreport" # Atau bisa diganti dengan /dev/shm/lsws/status/.rtreport
 
+# Path ke file .rtreport dari Litespeed Plesk
+# REPORT_FILE=/dev/shm/lsws/status/.rtreport"
+
 # Fungsi untuk mengirimkan pesan notifikasi ke Telegram
 TBT="MASUKAN TOKEN BOT TELEGRAM" # Token Bot Telegram
 TCID="MASUKAN CHAT ID TELEGRAM" # Chat ID dari Telegram
