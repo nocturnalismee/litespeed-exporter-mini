@@ -20,12 +20,12 @@ Karena script ini nantinya bertujuan untuk membantu memonitoring req_processing 
    ```bash
    git clone https://github.com/nocturnalismee/litespeed-exporter-mini
    cd litespeed-exporter
-   chmod -x req_processing.sh
+   chmod +x litespeed-exporter.sh
    ```
 
 2. **Edit konfigurasi Telegram** di dalam script:
    ```bash
-   nano req_processing.sh
+   nano litespeed-exporter.sh
    TBT="masukan telegram bot anda disni" # Token Bot Telegram
    TCID="masukan telegram chat id anda disini" # Chat ID dari Telegram
    MTID="masukan message thread id anda sini" # message_thread_id dari Telegram
@@ -34,12 +34,12 @@ Karena script ini nantinya bertujuan untuk membantu memonitoring req_processing 
 
 3. **Jalankan script:**
    ```bash
-   ./req_processing.sh
+   ./litespeed-exporter.sh
    ```
 
 4. **(Opsional) Tambahkan ke cronjob** untuk monitoring otomatis setiap 15 menit:
    ```
-   */15 * * * * /path/to/litespeed_exporter.sh
+   */15 * * * * /path/to/litespeed-exporter.sh
    ```
   > Untuk cronjob silahkan disesuaikan dengan kebutuhan dan kemampuan server.
 ---
